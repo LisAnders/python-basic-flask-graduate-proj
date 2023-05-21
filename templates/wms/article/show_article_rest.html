@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+    ShowArtRest
+{% endblock title %}
+
+{% block navname %}
+    <a class="navbar-brand" href="">Остатки товара {{article.code}} - {{article.name}}</a>
+{% endblock navname %}
+
+{% block body %}
+    <div class="my-3 mx-2 w-50">
+        <table class="table table-hover table-sm">
+            <tr>
+                <th>Место хранения</th>
+                <th>Количество</th>
+            </tr>
+            {% for art in artrest %}
+            <tr>
+                <td>{{art.wsname}}</td>
+                <td>{{art.quantity}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="my-3 mx-2">
+        <div class="row g-3">
+        <div class="col-auto">
+            <a class="btn btn-sm btn-secondary"
+            href="{{ url_for('wms_app.article_app.list') }}">
+            &#8592; К списку
+            </a>
+        </div>
+        </div>
+    </div>
+
+
+{% endblock body %}

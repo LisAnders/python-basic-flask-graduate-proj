@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}
+    OperationList
+{% endblock title %}
+
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+{% endblock link %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="{{ url_for('static', filename='js/opretaion_view.js') }}"></script>
+{% endblock script %}
+
+{% block navname %}
+    <li class="nav-item navbar-brand dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Операции
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="{{url_for('wms_app.index')}}">Главная</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{url_for('wms_app.article_app.list')}}">Справочник товаров</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{ url_for('wms_app.admin_app.admin_list') }}">Администрирование</a>
+            </li>
+        </ul>
+    </li>
+{% endblock navname %}
+
+{% block navdropdown %}
+    <div id="createOp"></div>
+{% endblock navdropdown %}
+
+
+{% block body %}
+
+    <div class="scrollopdiv my-3 mx-3 border border-primary-subtle">
+        <table class="table table-hover table-sm">
+        <tr>
+            <th>ID</th>
+            <th>Тип операции</th>
+            <th>Номер операции</th>
+            <th>Дата операции</th>
+            <th>Откуда</th>
+            <th>Куда</th>
+            <th>Статус</th>
+            <th>Сумма</th>
+            <th></th>
+            <th></th>
+        </tr>
+        
+        {% for op in operation %}
+        <tr class="opArt" id_op="{{op.id_op}}">
+            <td>{{op.id_op}}</td>
+            <td>{{op.top}}</td>
+            <td>{{op.opnumber}}</td>
+            <td>{{op.opdate}}</td>
+            <td>
+                {% if op.wso %}
+                    {{op.wso}}
+                {% else %}
+                    ПУСТО
+                {% endif %}
+            </td>
+            <td>
+                {% if op.wsi %}
+                    {{op.wsi}}
+                {% else %}
+                    ПУСТО
+                {% endif %}
+            </td>
+            <td>{{op.status}}</td>
+            <td>{{op.opsum}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+    </div>
+
+    <div>
+        {% if operation.has_prev %}<a href="{{ url_for('wms_app.operation_app.list', page=operation.prev_num) }}">{{ page - 1 }}</a> {% endif %}
+        {% if operation.has_next %}<a href="{{ url_for('wms_app.operation_app.list', page=operation.next_num) }}">{{ page + 1 }}</a> {% endif %}
+    </div>
+
+    <div class="my-3 mx-3 border border-primary-subtle" id="showOpart">
+    </div>
+
+{% endblock body %}
+

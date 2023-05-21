@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/wms/opart_view.js') }}"></script>
+{% endblock script %}
+
+{% block navbar %}
+
+{% endblock navbar %}
+
+{% block body %}
+
+<div class="my-1 mx-2">
+    <h5>
+        Позиции операции {{opinfo.opnumber}} от {{opinfo.opdate}}
+    </h5>
+</div>
+
+<div>
+    <div class=" my-1 mx-2 row g-3 align-items-center">
+        <div class="col-auto">
+            {# <button class="btn btn-sm btn-success" style="" id="btnOpartAdd" id_op="{{opinfo.id_op}}">Добавить</button> #}
+            <a href="{{ url_for('wms_app.opart_app.create_opart', id_op=opinfo.id_op) }}" class="btn btn-sm btn-success" id="btnOpartAdd" id_op="{{opinfo.id_op}}">Добавить</a>
+        </div>
+        {% if  opart%}
+        <div class="col-auto">
+            {# <button class="btn btn-sm btn-warning" style="" id="btnOpartChange"  disabled>Изменить</button> #}
+            <a class="btn btn-sm btn-warning disabled" id="btnOpartChange"  disabled>Изменить</a>
+        </div>
+        <div class="col-auto">
+            {# <button class="btn btn-sm btn-danger" style="" id="btnOpartDelete"  disabled>Удалить</button> #}
+            <a class="btn btn-sm btn-danger disabled" id="btnOpartDelete"  disabled>Удалить</a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="scrollopartdiv my-3 mx-3">
+    <table class="table table-hover table-sm">
+    <tr>
+        <th></th>
+        <th>ID</th>
+        <th>Товарная позиция</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+        {# <th></th>
+        <th></th> #}
+    </tr>
+    
+    {% for oa in opart %}
+    <tr>
+        <td><input class="chekOpart" id_opart="{{oa.id_opart}}" type="checkbox"></td>
+        <td>{{oa.id_opart}}</td>
+        <td>{{oa.code}} - {{oa.name}}</td>
+        <td>{{oa.quantity}}</td>
+        <td>{{oa.price}}</td>
+        <td>{{oa.opsum}}</td>
+        {# <td>
+            <a href="{{url_for('wms_app.opart_app.update_opart', id_opart = oa.id_opart)}}">Изменить</a>
+        </td>
+        <td>
+            <a href="{{url_for('wms_app.opart_app.delete_opart', id_opart = oa.id_opart)}}">Удалить</a>
+        </td> #}
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock body %}
+

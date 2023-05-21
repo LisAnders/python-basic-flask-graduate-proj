@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block body %}
+    <form method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                {{form.username.label(class_="col-form-label")}}
+            </div>
+            <div class="col-auto">
+                {{form.username(value=user.username, class_="form-control")}}
+            </div>
+        </div>
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                {{form.roles.label(class_="col-form-label")}}
+            </div>
+            <div class="col-auto">
+                {{form.roles(class_="form-select")}}
+            </div>
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                <a class="btn btn-sm btn-secondary" href="{{ url_for('wms_app.admin_app.admin_list') }}">&#8592; К списку</a>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-sm btn-success" type="submit">&#10004; Применить</button>
+            </div>
+        </div>
+    </form>
+{% endblock body %}

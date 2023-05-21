@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+    DeleteArticle
+{% endblock title %}
+
+{% block body %}
+    <h2>Удалить товар {{article.name}}?</h2>
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <button type="submit">Удалить</button>
+    </form>
+
+{% endblock body %}

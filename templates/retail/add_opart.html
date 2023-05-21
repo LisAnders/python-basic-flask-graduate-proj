@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block script %}
+    <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+    <script src="{{ url_for('static', filename='js/retail.js') }}"></script>
+{% endblock script %}
+
+{% block body %}
+
+<h2 class="mx-3 my-3">Добавление позиции</h2>
+    <div class="my-3">
+    <form class="row g-3" method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div class="col-auto mx-3">
+            {{form.barcode.label(class_="form-control-plaintext")}}
+        </div>
+        <div class="col-auto">
+            {{form.barcode(class_="form-control")}}
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-sm btn-outline-success" type="submit">Добавить</button>
+        </div>
+    </form>
+    </div>
+<div class="sRO my-3 w-50" id="showRetailOpart" id_op="{{id_op}}">
+</div>
+
+<div>
+    <a class="my-3 mx-3 btn btn-sm btn-success" href="{{ url_for('retail_app.confirm_sold', id_op=id_op) }}">Провести</a>
+</div>
+{% endblock body %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+    WarehouseList
+{% endblock title %}
+
+{% block body %}
+    <h2>Справочник мест хранений</h2>
+    <div>
+        <ul>
+            {% for ws in warehouse %}
+                <li>
+                    {{ws.id_ws}} || {{ws.name}} || {{ws.lastdate}}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div>
+        <a href="{{ url_for('warehouse_app.create') }}">Создать</a>
+    </div>
+{% endblock body %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+    WMS
+{% endblock title %}
+
+{% block navname %}
+    {# <a class="navbar-brand" href="#">WMS</a> #}
+    <li class="nav-item navbar-brand dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            WMS
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="{{url_for('wms_app.operation_app.list')}}">Операции</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{url_for('wms_app.article_app.list')}}">Справочник товаров</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{ url_for('wms_app.admin_app.admin_list') }}">Администрирование</a>
+            </li>
+        </ul>
+    </li>
+{% endblock navname %}
+
+
+{% block navdropdown %}
+
+{% endblock navdropdown %}
+
+{% block body %}
+
+
+<div>
+    Добро пожаловать в систему управления магазином! 
+</div>
+
+
+{% endblock body %}

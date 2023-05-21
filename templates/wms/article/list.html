@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+    ArticlePage
+{% endblock title %} 
+
+{% block navname %}
+    <li class="nav-item navbar-brand dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Справочник товаров
+        </a>
+        <ul class="dropdown-menu">
+            <li>
+                <a class="dropdown-item" href="{{url_for('wms_app.index')}}">Главная</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{url_for('wms_app.operation_app.list')}}">Операции</a>
+            </li>
+            <li>
+                <a class="dropdown-item" href="{{ url_for('wms_app.admin_app.admin_list') }}">Администрирование</a>
+            </li>
+        </ul>
+    </li>
+{% endblock navname %}
+{% block script %}
+    <script src="{{ url_for('static', filename='js/wms/article_view.js') }}"></script>
+{% endblock script %}
+
+
+{% block body %}
+    <div class="my-3 mx-2">
+        <div class="row g-4">
+            <div class="col-auto">
+                <a class="btn btn-sm btn-success" href="{{ url_for('wms_app.article_app.create') }}">Создать товар</a>
+            </div>
+            <div class="col-auto">
+                <a class="btn btn-sm btn-info disabled" id="btnRestInfo" >Показать остаток</a>
+            </div>
+        </div>
+    </div>
+    <div class="my-3 mx-2">
+        <table class="table table-hover table-sm">
+        <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Код товара</th>
+            <th>Наименование</th>
+            <th>Для онлайн</th>
+            <th>Цена закупки</th>
+            <th>Цена продажи</th>
+        </tr>
+        
+        {% for art in article  %}
+        <tr class="artDetail" id_art="{{art.id_art}}">
+            <td><input class="chekArticle" id_art="{{art.id_art}}" type="checkbox"></td>
+            <td>{{art.id_art}}</td>
+            <td>{{art.code}}</td>
+            <td>{{art.name}}</td>
+            <td>
+                {% if art.is_online %}
+                    Да
+                {% else %}
+                    Нет
+                {% endif %}
+            </td>
+            <td>{{art.price_buy}}</td>
+            <td>{{art.price_sale}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+
+    </div>
+{% endblock body %}

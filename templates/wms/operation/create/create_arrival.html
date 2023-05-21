@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Создание операции
+{% endblock title %}
+
+{% block navname %}
+    <a class="navbar-brand" href="#">Создание операции "{{typeop.name}}"</a>
+{% endblock navname %}
+
+
+{% block body %}
+
+    <form method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                {{form.opnumber.label(class_="col-form-label")}}
+            </div>
+            <div class="col-auto">
+                {{form.opnumber(class_="form-control")}}
+            </div>
+        </div>
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                {{form.opdate.label(class_="col-form-label")}}
+            </div>
+            <div class="col-auto">
+                {{form.opdate(class_="form-control")}}
+            </div>
+        </div>
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                {{form.wsi.label(class_="col-form-label")}}
+            </div>
+            <div class="col-auto">
+                {{form.wsi(class_="form-select")}}
+            </div>
+        </div>
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                {{form.status.label(class_="col-form-label")}}
+            </div>
+            <div class="col-auto">
+                {{form.status(class_="form-select")}}
+            </div>
+        </div>
+        <div class="row g-2">
+            <div class="col-auto my-3 mx-3">
+                <a href="{{url_for('wms_app.operation_app.list')}}" class="btn btn-secondary">&#8592; Назад</a>
+            </div>
+            <div class="col-auto my-3 mx-3">
+                <button class="btn btn-success" type="submit">&#10004; Создать</button>
+            </div>
+        </div>
+    </form>
+{% endblock body %}

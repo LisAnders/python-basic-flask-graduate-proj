@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block body %}
+{# <div>
+    <h5>
+        Позиции операции {{opinfo.opnumber}} от {{opinfo.opdate}}
+    </h5>
+</div> #}
+
+<div class="my-3 mx-3">
+    <table class="table table-hover table-sm">
+    <tr>
+        <th>ID</th>
+        <th>Товарная позиция</th>
+        <th style="padding-right: 0px;">Количество</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+    </tr>
+    
+    {% for oa in opart %}
+    
+    <tr>
+        <td>{{oa.id_opart}}</td>
+        <td>{{oa.code}} - {{oa.name}}</td>
+        <td>{{oa.quantity}}</td>
+        <td>{{oa.price}}</td>
+        <td>{{oa.opsum}}</td>
+
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+{% endblock body %}

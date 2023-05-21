@@ -1,0 +1,29 @@
+<h2>Создание операции {{typeop.name}}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div>
+            {{form.opnumber.label()}}
+            {{form.opnumber()}}
+        </div>
+        <div>
+            {{form.opdate.label()}}
+            {{form.opdate()}}
+        </div>
+        {% if form.wsi and form.wso %}
+            <div>
+                {{form.wso.label()}}
+                {{form.wso()}}
+            </div>
+            <div>
+                {{form.wsi.label()}}
+                {{form.wsi()}}
+            </div>
+        {% endif %}
+        <div>
+            {{form.status.label()}}
+            {{form.status()}}
+        </div>
+        <div>
+            <button type="submit">Создать</button>
+        </div>
+    </form>

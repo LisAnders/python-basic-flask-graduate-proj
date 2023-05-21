@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Арм Продаж
+{% endblock title %}
+
+{% block navname %}
+    <a class="navbar-brand" href="">АРМ Продажи</a>
+{% endblock navname %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/retail_index.js') }}"></script>   
+{% endblock script %}
+
+
+{% block body %}
+    <div class="my-3 mx-3">
+        <a class="btn btn-lg btn-success" href="{{url_for('retail_app.create_sale')}}"> Создать продажу</a>
+    </div>
+
+    <div>
+        <table class="table table-hover table-sm">
+        <tr>
+            <th>ID</th>
+            
+            <th>Номер операции</th>
+            <th>Дата операции</th>
+
+            <th>Статус</th>
+            <th>Сумма</th>
+            <th></th>
+            <th></th>
+        </tr>
+        {% for op in sales %}
+        <tr class="retailOp" id_op="{{op.id_op}}">
+            <td>{{op.id_op}}</td>
+            
+            <td>{{op.opnumber}}</td>
+            <td>{{op.opdate}}</td>
+
+            <td>{{op.status_name}}</td>
+            <td>{{op.opsum}}</td>
+        </tr>
+        {% endfor %}
+        </table>
+    <div>
+        {% if sales.has_prev %}<a href="{{ url_for('retail_app.retail_list', page=sales.prev_num) }}">{{ page - 1 }}</a> {% endif %}
+        {% if sales.has_next %}<a href="{{ url_for('retail_app.retail_list', page=sales.next_num) }}">{{ page + 1 }}</a> {% endif %}
+    </div>
+
+    <div id="retailOpart">
+    
+    </div>
+{% endblock body %}
+

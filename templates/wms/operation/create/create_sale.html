@@ -1,0 +1,19 @@
+<h2>Добавление позиции {{op.id_op}}, {{op.opnumber}}</h2>
+    <form method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div>
+            {{form.id_art.label()}}
+            {{form.id_art()}}
+        </div>
+        <div>
+            {{form.quantity.label()}}
+            {{form.quantity()}}
+        </div>
+        <div>
+            {{form.price.label()}}
+            {{form.price()}}
+        </div>
+        <div>
+            <button type="submit">Создать</button>
+        </div>
+    </form>

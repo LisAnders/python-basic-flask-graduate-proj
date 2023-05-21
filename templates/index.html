@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Система управления магазином
+{% endblock title %}
+
+{% block navname %}
+    <a class="navbar-brand" href="">Система управления магазином</a>
+{% endblock navname %}
+
+{% block body %}
+    <div class="my-5 container-fluid d-flex w-50 h-100 justify-content-center align-items-center">
+        <div class="row g-3 ">
+            
+                <div class="row g-1">
+                    <div class="col-auto">
+                        <h5>Добро пожаловать!</h5>
+                    </div>
+                </div>
+            
+
+                <div class="row g-1">
+                    <div class="col-auto">
+                        <a class="btn btn-lg btn-outline-primary" href="{{ url_for('retail_app.retail_list') }}">АРМ Продажи</a>
+                    </div>
+                </div>
+
+                <div class="row g-1">
+                    <div class="col-auto">
+                        <a class="btn btn-lg btn-outline-primary" href="{{ url_for('wms_app.index') }}">Управление магазином</a>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+
+{% endblock body %}

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Удаление товара
+{% endblock title %}
+
+{% block navname %}
+    <a class="navbar-brand" href="#">
+    Удаление товара
+    </a>
+{% endblock navname %}
+
+{% block body %}
+
+    <form method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="my-3 mx-3 row g-1">
+            <div class="col-auto">
+                <h3>Внимание!</h3>
+            </div>
+        </div>
+        <div class="mx-3 row g-1">
+            <div class="col-auto">
+                <h5>Вы уверены что хотите удалить товар: {{opart.article.code}} - {{opart.article.name}} 
+            </div>
+        </div>
+        <div class="mx-3 row g-1">
+            <div class="col-auto">
+                <h5>из операции {{opart.operation.opnumber}} от {{opart.operation.opdate}}?</h5>
+            </div>
+        </div>
+
+        <div class="row g-2">
+            <div class="col-auto my-3 mx-3">
+                <a href="{{url_for('wms_app.operation_app.list')}}" class="btn btn-secondary">&#8592; Назад</a>
+            </div>
+            <div class="col-auto my-3 mx-3">
+                <button class="btn btn-danger" type="submit">&#10006; Удалить</button>
+            </div>
+        </div>
+    </form>
+
+{% endblock body %}

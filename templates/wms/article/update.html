@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block title %}
+    UpdateArticle
+{% endblock title %}
+
+{% block navname %}
+    <a class="navbar-brand" href="">Изменение товарной позиции</a>
+{% endblock navname %}
+
+{% block body %}
+    <form method="post" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                <div class="row g-2 align-items-center">
+                    <div class="col-auto">
+                        {{form.code.label(class_="col-form-label")}}
+                    </div>
+                    <div class="col-auto">
+                        {{form.code(value=article.code, class_="form-control")}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="row g-2 align-items-center">
+                    <div class="col-auto">
+                        {{form.name.label(class_="col-form-label")}}
+                    </div>
+                    <div class="col-auto">
+                        {{form.name(value=article.name, class_="form-control")}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                {{form.is_online.label(class_="col-form-label")}}
+            </div>
+            <div class="col-auto">
+                {% if article.is_online %}
+                    {{form.is_online(checked='', class_="form-check-input")}}
+                {%else%}
+                    {{form.is_online(class_="form-check-input")}}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                <div class="row g-2 align-items-center">
+                    <div class="col-auto">
+                        {{form.price_buy.label(class_="col-form-label")}}
+                    </div>
+                    <div class="col-auto">
+                        {{form.price_buy(value=article.price_buy, class_="form-control")}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="row g-2 align-items-center">
+                    <div class="col-auto">
+                        {{form.price_sale.label(class_="col-form-label")}}
+                    </div>
+                    <div class="col-auto">
+                        {{form.price_sale(value=article.price_sale, class_="form-control")}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-3 mx-3 row g-2 align-items-center">
+            <div class="col-auto">
+                <a class="btn btn-sm btn-secondary" href="{{ url_for('wms_app.article_app.list') }}">
+                    &#8592; К списку
+                </a>
+            </div>
+            <div class="col-auto">
+                <button class="btn btn-sm btn-success" type="submit">&#10004; Изменить</button>
+            </div>
+        </div>
+
+    </form>
+{% endblock body %}

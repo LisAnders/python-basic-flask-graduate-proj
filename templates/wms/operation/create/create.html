@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<li class="nav-item dropdown" id="createOp">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Создать операцию
+        </a>
+        <ul class="dropdown-menu">
+        {% for top in typeop %}
+            <li>
+                <a class="dropdown-item" href="{{url_for('wms_app.operation_app.redirect', id_top = top.id_top)}}">{{top.name}}</a>
+            </li>
+        {% endfor %}
+        </ul>
+</li>
+

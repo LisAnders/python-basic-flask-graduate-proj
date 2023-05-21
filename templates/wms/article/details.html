@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}
+    ArticleDetails
+{% endblock title %} 
+
+{% block navname %}
+    <a class="navbar-brand" href="">Данные по товару {{article.code}} - {{article.name}}</a>
+{% endblock navname %}
+
+{% block body %}
+  <div class="my-3 mx-2">
+    <div class="row g-2">
+      <div class="col-auto">
+        <h5>ID Товара: </h5>
+      </div>
+      <div class="col-auto">
+          <h5>{{article.id_art}}</h5>
+      </div>
+    </div>
+
+    <div class="row g-2">
+      <div class="col-auto">
+        <h5>Код товара: </h5>
+      </div>
+      <div class="col-auto">
+          <h5>{{article.code}}</h5>
+      </div>    
+    </div>
+
+    <div class="row g-2">
+      <div class="col-auto">
+        <h5>Наименование: </h5>
+      </div>
+      <div class="col-auto">
+          <h5>{{article.name}}</h5>
+      </div>    
+    </div>
+
+    <div class="row g-2">
+      <div class="col-auto">
+        <h5>Для онлайн продаж: </h5>
+      </div>
+      <div class="col-auto">
+          {% if article.is_online %}
+            <h5>Да</h5>
+          {% else %}
+            <h5>Нет</h5>
+          {% endif %}
+      </div>    
+    </div>
+    
+      <div class="row g-2">
+        <div class="col-auto">
+          <h5>Цена закупки: </h5>
+        </div>
+        <div class="col-auto">
+            <h5>{{article.price_buy}}</h5>
+        </div>    
+      </div>
+
+      <div class="row g-2">
+        <div class="col-auto">
+          <h5>Цена продажи: </h5>
+        </div>
+        <div class="col-auto">
+            <h5>{{article.price_sale}}</h5>
+        </div>    
+      </div>
+
+  </div>
+
+  <div class="my-3 mx-2">
+    <div class="row g-3">
+      <div class="col-auto">
+        <a class="btn btn-sm btn-secondary"
+          href="{{ url_for('wms_app.article_app.list') }}">
+          &#8592; К списку
+        </a>
+      </div>
+      <div class="col-auto">
+        <a class="btn btn-sm btn-warning"
+          href="{{ url_for('wms_app.article_app.update', id_art=article.id_art) }}">
+          &#9997; Изменить
+        </a>
+      </div>
+      <div class="col-auto">
+          <button type="button" id="deleteOpartBtn{{article.id_art}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{article.id_art}}">
+          &#10006; Удалить
+          </button>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal{{article.id_art}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="deleteModalLabel">Внимание!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h5>Вы уверены что хотите удалить товар {{article.code}} - {{article.name}} ?</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                        <form method="post" action="{{  url_for('wms_app.article_app.delete', id_art=article.id_art) }}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-danger">Да</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>   
+      </div>
+    </div>
+  </div>
+{% endblock body %}

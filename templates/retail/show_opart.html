@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block link %}
+    {# <link rel="stylesheet" href="{{ url_for('static', filename='css/retail.css') }}"> #}
+{% endblock link %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/retail_opart.js') }}"></script>   
+{% endblock script %}
+
+{% block navbar %}
+{% endblock navbar %}
+
+{% block body %}
+
+<div class="my-3 mx-3">
+    <table class="table table-hover table-sm">
+    <tr>
+        <th>ID</th>
+        <th>Товарная позиция</th>
+        <th style="padding-right: 0px;">Количество</th>
+        <th>Цена</th>
+        <th>Сумма</th>
+    </tr>
+    
+    {% for oa in opart %}
+        <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    
+    <tr>
+        <td>{{oa.id_opart}}</td>
+        <td>{{oa.code}} - {{oa.name}}</td>
+        <td><input class="input_quant" id="inp{{oa.id_opart}}" id_opart="{{oa.id_opart}}" value="{{oa.quantity}}"></td>
+        <td>{{oa.price}}</td>
+        <td>{{oa.opsum}}</td>
+        <td>
+            <div>
+            <div class="row g-3">
+                <div class="col-auto">
+                    <button class="cancel_btn btn btn-sm btn-outline-danger" style="display: none;" id="cBtn{{oa.id_opart}}" id_opart="{{oa.id_opart}}">&#10006;</button>
+                </div>
+                <div class="col-auto">
+                    <button type="submit" class="save_btn btn btn-sm btn-outline-success" style="display: none;" id="sBtn{{oa.id_opart}}" id_opart="{{oa.id_opart}}">&#10004;</button>
+                </div>
+            </div>
+
+            <button type="button" id="deleteOpartBtn{{oa.id_opart}}" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{oa.id_opart}}">Удалить</button>
+                
+                <div class="modal fade" id="deleteModal{{oa.id_opart}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="deleteModalLabel">Внимание!</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h3>Вы уверены что хотите удалить товар {{oa.code}} - {{oa.name}} ?</h3>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Нет</button>
+                        <form method="post" action="{{ url_for('retail_app.delete_opart', id_opart=oa.id_opart)}}">
+                            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                            <button type="submit" class="btn btn-primary">Да</button>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+<div>
+    <h5 class="my-3 mx-3">Итого: {{opsum}}</h3>
+</div>
+{% endblock body %}
