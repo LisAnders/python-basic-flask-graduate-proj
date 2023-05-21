@@ -1,0 +1,20 @@
+.cancel_btn {
+    display: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: hidden;
+    background-color: rgb(189, 164, 230);
+    font-size: 20px;
+}
+
+.save_btn {
+    display: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border-style: hidden;
+    background-color: rgb(8, 255, 140);
+    font-size: 20px;
+    
+}

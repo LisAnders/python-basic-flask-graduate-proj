@@ -1,0 +1,10 @@
+.scrollopdiv {
+    height: 400px;
+    /* width: 1200px; */
+    overflow-x: scroll;
+}
+
+.scrollopartdiv {
+    height: 300px;
+    overflow-x: scroll;
+}
